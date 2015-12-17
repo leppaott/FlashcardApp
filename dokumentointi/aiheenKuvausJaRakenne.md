@@ -1,5 +1,5 @@
 **Aihe**
-FlashcardApp on hyötyohjelma, jota voi käyttää mm. vieraan kielen sanaston opettelua varten. Aluksi tarkoituksena on toteuttaa yksinkertainen kysymys-vastaus-tyyppinen peli, jonka jälkeen ohjelmaa voidaan laajentaa pelimäisemmäksi, lisätä vastausvaihtoehtojen määrää, antaa käyttäjän luoda omia korttipakkojaan.
+FlashcardApp on hyötyohjelma, jota voi käyttää mm. vieraan kielen sanaston opettelua varten. Aluksi tarkoituksena on toteuttaa yksinkertainen kysymys-vastaus-tyyppinen peli: opiskelijalle näytetään sana, jonka jälkeen voidaan näyttää vastaus, kun opiskelija on valmis. Myöhemmin ohjelmaa voidaan laajentaa pelimäisemmäksi, lisätä vastausvaihtoehtojen määrää, antaa käyttäjän arvata oikeata vastausta ja luoda omia korttipakkojaan.
 >Tarkentuu pikkuhiljaa 
 
 **Käyttäjät:** Opiskelija
