@@ -1,3 +1,3 @@
 # FlashcardApp
 
-TESTI
+Ankin innostama sanamuistipeli.
