@@ -39,6 +39,14 @@
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
             <version>1.1.4</version>
+		  <configuration>
+                <targetClasses>
+                    <param>flashcardapp.domain.*</param>
+                </targetClasses>
+                <targetTests>
+                    <param>flashcardapp.domain.*</param>
+                </targetTests>
+            </configuration>
         </plugin>
     </plugins>
 </build>
