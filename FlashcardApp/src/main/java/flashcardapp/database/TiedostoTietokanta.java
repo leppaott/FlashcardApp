@@ -36,6 +36,7 @@ public class TiedostoTietokanta implements Tietokanta {
             for (Pakka pakka : pakat) {
                 oos.writeObject(pakka);
             }
+            oos.writeObject(null);
         } catch (Exception e) {
             System.out.println("Tiedostokanta poikkeus tallentamisessa");
         }
