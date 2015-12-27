@@ -18,4 +18,9 @@ public class Kortti implements Serializable {
     public String getKaantopuoli() {
         return kaantopuoli;
     }
+    
+    @Override
+    public String toString() {
+        return etupuoli + " - " + kaantopuoli;
+    }
 }

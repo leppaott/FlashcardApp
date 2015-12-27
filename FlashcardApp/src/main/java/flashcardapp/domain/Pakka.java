@@ -1,16 +1,19 @@
 package flashcardapp.domain;
 
+import flashcardapp.util.ListMemento;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class Pakka implements Iterable<Kortti>, Serializable {
 
     private String nimi;
     private List<Kortti> kortit;
-
+    private ListMemento<Kortti> memento;
+    
     public Pakka(String pakanNimi) {
         nimi = pakanNimi;
         kortit = new ArrayList<>();
@@ -27,10 +30,16 @@ public class Pakka implements Iterable<Kortti>, Serializable {
     public void lisaaKortti(Kortti kortti) {
         kortit.add(kortti);
     }
-    //todo poista
 
     public void sekoita() {
+        if (memento == null) {
+            memento = new ListMemento<>(kortit);
+        }
         Collections.shuffle(kortit);
+    }
+    
+    public void palautaAlkutilaan() {
+        kortit = memento.getAlkutila();
     }
     
     public Kortti getKortti(int indeksi) {

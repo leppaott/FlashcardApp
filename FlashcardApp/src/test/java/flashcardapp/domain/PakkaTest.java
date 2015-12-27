@@ -47,14 +47,20 @@ public class PakkaTest {
     public void kortitSekoittuvat() {
         Kortti[] kortit = {new Kortti("a", "b"), new Kortti("c", "d"), new Kortti("e", "f"),
             new Kortti("g", "h"), new Kortti("i", "j"), new Kortti("k", "l"), new Kortti("m", "n")};
-
         lisaaPakkaanKortit(kortit);
-
         assertEquals(true, Arrays.equals(kortit, pakka.getKortit().toArray()));
-
         pakka.sekoita(); //oletetaan että jotain on muuttunut 
-
         assertEquals(false, Arrays.equals(kortit, pakka.getKortit().toArray()));
     }
-
+    
+    @Test
+    public void pakkaPalautuuAlkuperaiseenTilaan() {
+        Kortti[] kortit = {new Kortti("a", "b"), new Kortti("c", "d"), new Kortti("e", "f"),
+            new Kortti("g", "h"), new Kortti("i", "j"), new Kortti("k", "l"), new Kortti("m", "n")};
+        lisaaPakkaanKortit(kortit);
+        pakka.sekoita();
+        assertEquals(false, Arrays.equals(kortit, pakka.getKortit().toArray()));
+        pakka.palautaAlkutilaan();
+        assertEquals(true, Arrays.equals(kortit, pakka.getKortit().toArray()));
+    }
 }
