@@ -14,8 +14,23 @@ public class KorttiTest {
     }
 
     @Test
-    public void testaaToimivatkoGetterit() {
+    public void getteritToimivat() {
         assertEquals("Suomi", kortti.getEtupuoli());
         assertEquals("Finland", kortti.getKaantopuoli());
+    }
+    
+    @Test
+    public void setteritToimivat() {
+        kortti.setEtupuoli("Finland");
+        kortti.setKaantopuoli("Suomi");
+        assertEquals("Finland", kortti.getEtupuoli());
+        assertEquals("Suomi", kortti.getKaantopuoli());
+    }
+    
+    @Test
+    public void puolienKaantaminenToimii() {
+        kortti.kaannaPuolet();
+        assertEquals("Finland", kortti.getEtupuoli());
+        assertEquals("Suomi", kortti.getKaantopuoli());
     }
 }

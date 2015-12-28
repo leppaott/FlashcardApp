@@ -1,6 +1,7 @@
 package flashcardapp.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Kortti implements Serializable {
 
@@ -19,6 +20,25 @@ public class Kortti implements Serializable {
         return kaantopuoli;
     }
     
+    public void setEtupuoli(String etupuoli) {
+        this.etupuoli = etupuoli;
+    }
+    
+    public void setKaantopuoli(String kaantopuoli) {
+        this.kaantopuoli = kaantopuoli;
+    }
+    
+    public void kaannaPuolet() {
+        String etu = etupuoli;
+        etupuoli = kaantopuoli;
+        kaantopuoli = etu;
+    }
+    
+    public List<String> getLisatiedot() {
+        return null;
+    }
+    
+    //to be removed
     @Override
     public String toString() {
         return etupuoli + " - " + kaantopuoli;

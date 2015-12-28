@@ -12,6 +12,8 @@ public class TiedostoTietokanta implements Tietokanta {
 
     public static final String TIEDOSTO = "flashcardapp.db";
 
+    //konstruktori tiedosto.. save as, save, 
+    
     @Override
     public List<Pakka> lataaPakat() {
         List<Pakka> pakat = new ArrayList<>();
