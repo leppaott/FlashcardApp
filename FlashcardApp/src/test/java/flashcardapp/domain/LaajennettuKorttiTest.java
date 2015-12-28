@@ -18,7 +18,7 @@ public class LaajennettuKorttiTest {
         kortti.lisaaTietoa("VIHJE: Se oli valkoinen talvi.");
 
         List<String> tiedot = kortti.getLisatiedot();
-        assertEquals(1, tiedot.size()); //VIHJE siis, ei ehkä paras tapa
+        assertEquals(1, tiedot.size()); //VIHJE siis
         assertTrue(tiedot.get(0).contains("VIHJE:"));
     }
 

@@ -1,4 +1,6 @@
-[Kortti]*<-*[Pakka]
+[Kortti]*<-1[Pakka]
 [<<Interface>>;Tietokanta]uses -.->[Pakka]
 [<<Interface>>;Tietokanta]^-.-[TiedostoTietokanta]
 [Kortti]^-[LaajennettuKortti]
+[FlashcardApp{bg:green}]1-*[Pakka]
+[FlashcardApp{bg:green}]creates-.->[TiedostoTietokanta]

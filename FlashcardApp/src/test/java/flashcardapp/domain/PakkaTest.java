@@ -26,15 +26,19 @@ public class PakkaTest {
         pakka.lisaaKortti(new Kortti("Etu", "Kaanto"));
         assertEquals(1, pakka.pakanKoko());
     }
-
+    
     @Test
-    public void kortinOttoToimiiJaNullPalautetaanKunIndeksiYliKoon() {
+    public void kortinOttoToimii() {
         Kortti kortti = new Kortti("Etu", "Kaanto");
         pakka.lisaaKortti(kortti);
         Kortti palautettu = pakka.getKortti(0);
         assertEquals(kortti, palautettu);
-        palautettu = pakka.getKortti(1);
-        assertEquals(null, palautettu);
+    }
+
+    @Test
+    public void nullPalautetaanKunOtetunKortinIndeksiYliKoon() {
+        Kortti kortti = pakka.getKortti(0);
+        assertEquals(null, kortti);
     }
 
     private void lisaaPakkaanKortit(Kortti[] kortit) {
@@ -43,11 +47,16 @@ public class PakkaTest {
         }
     }
 
-    @Test
-    public void kortitSekoittuvat() {
+    private Kortti[] lisaaPakkaanKasaKortteja() {
         Kortti[] kortit = {new Kortti("a", "b"), new Kortti("c", "d"), new Kortti("e", "f"),
             new Kortti("g", "h"), new Kortti("i", "j"), new Kortti("k", "l"), new Kortti("m", "n")};
         lisaaPakkaanKortit(kortit);
+        return kortit;
+    }
+    
+    @Test
+    public void kortitSekoittuvat() {
+        Kortti[] kortit = lisaaPakkaanKasaKortteja();
         assertEquals(true, Arrays.equals(kortit, pakka.getKortit().toArray()));
         pakka.sekoita(); //oletetaan että jotain on muuttunut 
         assertEquals(false, Arrays.equals(kortit, pakka.getKortit().toArray()));
@@ -55,11 +64,17 @@ public class PakkaTest {
     
     @Test
     public void pakkaPalautuuAlkuperaiseenTilaan() {
-        Kortti[] kortit = {new Kortti("a", "b"), new Kortti("c", "d"), new Kortti("e", "f"),
-            new Kortti("g", "h"), new Kortti("i", "j"), new Kortti("k", "l"), new Kortti("m", "n")};
-        lisaaPakkaanKortit(kortit);
+        Kortti[] kortit = lisaaPakkaanKasaKortteja();
         pakka.sekoita();
         assertEquals(false, Arrays.equals(kortit, pakka.getKortit().toArray()));
+        pakka.palautaAlkutilaan();
+        assertEquals(true, Arrays.equals(kortit, pakka.getKortit().toArray()));
+    }
+    
+    @Test
+    public void sekoittamatonPakkaPysyyMuuttumattomanaKunPalautetaanAlkutilaan() {
+        Kortti[] kortit = lisaaPakkaanKasaKortteja();
+        assertEquals(true, Arrays.equals(kortit, pakka.getKortit().toArray()));
         pakka.palautaAlkutilaan();
         assertEquals(true, Arrays.equals(kortit, pakka.getKortit().toArray()));
     }

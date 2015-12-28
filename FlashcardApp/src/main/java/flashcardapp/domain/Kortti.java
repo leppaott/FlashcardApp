@@ -38,7 +38,6 @@ public class Kortti implements Serializable {
         return null;
     }
     
-    //to be removed
     @Override
     public String toString() {
         return etupuoli + " - " + kaantopuoli;

@@ -39,6 +39,9 @@ public class Pakka implements Iterable<Kortti>, Serializable {
     }
     
     public void palautaAlkutilaan() {
+        if (memento == null) {
+            return;
+        }
         kortit = memento.getAlkutila();
     }
     

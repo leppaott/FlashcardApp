@@ -11,7 +11,7 @@ public class LaajennettuKortti extends Kortti {
         lisatiedot = new ArrayList<>();
     }
 
-    public void lisaaTietoa(String tieto) { //nimeäminen
+    public void lisaaTietoa(String tieto) {
         lisatiedot.add(tieto);
     }
     

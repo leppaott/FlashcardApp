@@ -48,7 +48,7 @@ public class TiedostoTietokantaTest {
             for (int j = 0; j < a.pakanKoko(); j++) {
                 assertEquals(a.getKortti(j).toString(), b.getKortti(j).toString());
             }
-        }//todo parempi toimiva tarkistus
+        }
         //assertEquals(pakat, luetut) //nope
         //assertEquals(true, Arrays.equals(pakat.toArray(), luetut.toArray())); //nope
     }
