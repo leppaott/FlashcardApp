@@ -1,4 +1,4 @@
-# tuntikirjanpito
+﻿# tuntikirjanpito
 
 ## Deadline 1
 pvm        | aika | kohde |
@@ -8,11 +8,17 @@ pvm        | aika | kohde |
 ## Deadline 2
 pvm        | aika | kohde |
 -----------|------|-------|
-**21.12** | 3.5 h | Kortti, Pakka, testit niille, Tietokantaa, luokkakaavio, Java APIn lukeminen
+**21.12.2015** | 3.5 h | Kortti, Pakka, testit niille, Tietokantaa, luokkakaavio, Java APIn lukeminen
 
 ## Deadline 3
 pvm        | aika | kohde |
 -----------|------|-------|
-**27.12** | 3.5 h |refaktorointia, testausta. |
-**28.12** | 2 h  | luokat ja testit alkaa olla kunnossa, seuraavaksi käyttöliittymään |
+**27.12.2015** | 3.5 h |refaktorointia, testausta. |
+**28.12.2015** | 2 h  | luokat ja testit alkaa olla kunnossa, seuraavaksi käyttöliittymään |
+**28.12.2015** | 3.5 h  | koodikatselmointia |
 
+## Deadline 4
+pvm        | aika | kohde |
+-----------|------|-------|
+**30.12.2015** | 2 h | käyttöliittymää |
+**1.1.2016** | 2 h  | käyttöliittymää |
