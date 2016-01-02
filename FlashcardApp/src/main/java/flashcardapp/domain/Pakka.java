@@ -8,6 +8,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Objects;
 
+/**
+ * Luokka sisältää Pakan toiminnallisuuden.
+ */
 public class Pakka implements Iterable<Kortti>, Serializable {
 
     private String nimi;
@@ -19,11 +22,11 @@ public class Pakka implements Iterable<Kortti>, Serializable {
         kortit = new ArrayList<>();
     }
 
-    public String pakanNimi() {
+    public String getNimi() {
         return nimi;
     }
     
-    public int pakanKoko() {
+    public int getKoko() {
         return kortit.size();
     }
 
@@ -31,6 +34,9 @@ public class Pakka implements Iterable<Kortti>, Serializable {
         kortit.add(kortti);
     }
 
+    /**
+     * Metodi sekoittaa pakan.
+     */
     public void sekoita() {
         if (memento == null) {
             memento = new ListMemento<>(kortit);
@@ -38,6 +44,9 @@ public class Pakka implements Iterable<Kortti>, Serializable {
         Collections.shuffle(kortit);
     }
     
+    /**
+     * Metodi palauttaa pakan ensimmäistä sekoitusta edeltävään tilaan. 
+     */
     public void palautaAlkutilaan() {
         if (memento == null) {
             return;

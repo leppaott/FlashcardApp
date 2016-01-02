@@ -3,6 +3,9 @@ package flashcardapp.domain;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Luokka Kortti sisältää kortille tarvittavat palvelut.
+ */
 public class Kortti implements Serializable {
 
     private String etupuoli, kaantopuoli;
@@ -28,12 +31,20 @@ public class Kortti implements Serializable {
         this.kaantopuoli = kaantopuoli;
     }
     
+    /**
+     * Metodi kääntää etupuolen takapuoleksi ja toisinpäin.
+     */
     public void kaannaPuolet() {
         String etu = etupuoli;
         etupuoli = kaantopuoli;
         kaantopuoli = etu;
     }
     
+    /**
+     * Metodi palauttaa null. 
+     * 
+     * @see LaajennettuKortti
+     */
     public List<String> getLisatiedot() {
         return null;
     }

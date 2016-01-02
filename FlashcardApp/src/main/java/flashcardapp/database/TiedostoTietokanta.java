@@ -1,6 +1,7 @@
 package flashcardapp.database;
 
 import flashcardapp.domain.Pakka;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -8,9 +9,12 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Yksinkertainen tietokanta.
+ */
 public class TiedostoTietokanta implements Tietokanta {
 
-    public static String tiedosto;
+    private String tiedosto;
 
     public TiedostoTietokanta() {
         this("flashcardapp.db");
@@ -19,14 +23,30 @@ public class TiedostoTietokanta implements Tietokanta {
     public TiedostoTietokanta(String tiedosto) {
         this.tiedosto = tiedosto;
     }
-    
+
+    @Override
     public void setTiedosto(String tiedosto) {
+        if (!tiedosto.endsWith(".db")) {
+            tiedosto += ".db";
+        }
         this.tiedosto = tiedosto;
     }
-    
+
+    private boolean tiedostoOlemassa() {
+        return new File(tiedosto).exists();
+    }
+
+    /**
+     * Metodi lataa pakat tiedostosta.
+     * @return Lista pakoista.
+     */
     @Override
     public List<Pakka> lataaPakat() {
         List<Pakka> pakat = new ArrayList<>();
+
+        if (!tiedostoOlemassa()) {
+            return pakat;
+        }
 
         try (FileInputStream fis = new FileInputStream(tiedosto);
                 ObjectInputStream ois = new ObjectInputStream(fis)) {
@@ -38,9 +58,14 @@ public class TiedostoTietokanta implements Tietokanta {
         } catch (Exception e) {
             System.out.println("Poikkeus pakkojen lataamisessa");
         }
+
         return pakat;
     }
 
+    /**
+     * Metodi tallentaa pakat tiedostoon.
+     * @param pakat
+     */
     @Override
     public void tallennaPakat(List<Pakka> pakat) {
         try (FileOutputStream fos = new FileOutputStream(tiedosto);

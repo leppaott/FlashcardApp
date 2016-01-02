@@ -22,3 +22,4 @@ pvm        | aika | kohde |
 -----------|------|-------|
 **30.12.2015** | 2 h | käyttöliittymää |
 **1.1.2016** | 2 h  | käyttöliittymää |
+**2.1.2016** | 2 h  | MenuBar, käyttöliittymää |

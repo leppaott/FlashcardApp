@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JButton;
 
+/**
+ * Luokka laajentaa JButton pakoille.
+ */
 public class PakkaNappi extends JButton implements MouseListener {
 
     public PakkaNappi(String pakanNimi, ActionListener actionListener) {
@@ -18,11 +21,14 @@ public class PakkaNappi extends JButton implements MouseListener {
         super.setBorderPainted(false);
         super.setContentAreaFilled(false);
         super.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        this.addActionListener(actionListener);
-        this.addMouseListener(this);
+        super.addActionListener(actionListener);
+        super.addMouseListener(this);
     }
 
-    private void vaihdaAlleviivausNapille() {
+    /**
+     * Metodi vaihtaa alleviivauksen päälle tai pois napille.
+     */
+    public void vaihdaAlleviivausNapille() {
         Font font = super.getFont();
         Map<TextAttribute, Object> attribuutit = new HashMap(font.getAttributes());
 

@@ -44,8 +44,8 @@ public class TiedostoTietokantaTest {
         for (int i = 0; i < 2; i++) {
             Pakka a = pakat.get(i);
             Pakka b = luetut.get(i);
-            assertTrue(a.pakanKoko() == b.pakanKoko());
-            for (int j = 0; j < a.pakanKoko(); j++) {
+            assertTrue(a.getKoko()== b.getKoko());
+            for (int j = 0; j < a.getKoko(); j++) {
                 assertEquals(a.getKortti(j).toString(), b.getKortti(j).toString());
             }
         }

@@ -10,6 +10,9 @@ import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Luokka laajentaa JPanel.
+ */
 public class PakkaPaneeli extends JPanel implements ActionListener {
 
     private final Kayttoliittyma kayttoliittyma;
@@ -24,7 +27,7 @@ public class PakkaPaneeli extends JPanel implements ActionListener {
         JLabel otsikko = new JLabel("Pakat");
         PakkaNappi pakka1 = new PakkaNappi("Pakka1", this);
 
-        layout = new GroupLayout(this);
+        layout = new GroupLayout(this); //SWITCH for easier components
         super.setLayout(layout);
 
         layout.setAutoCreateGaps(true);
@@ -46,12 +49,17 @@ public class PakkaPaneeli extends JPanel implements ActionListener {
                 ));
     }
 
-    private void lisaaNappi(String nimi) {
+    /**
+     * Metodi lisää paneeliin PakkaNapin.
+     * 
+     * @see PakkaNappi
+     * @param nimi
+     */
+    public void lisaaNappi(String nimi) {
         PakkaNappi pakka = new PakkaNappi(nimi, this);
         horizontalGroup.addComponent(pakka);
         verticalGroup.addComponent(pakka);
-        kayttoliittyma.getFrame().revalidate();
-        kayttoliittyma.getFrame().repaint();
+        //kayttoliittyma.paivita();
     }
 
     @Override

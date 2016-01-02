@@ -17,14 +17,14 @@ public class PakkaTest {
 
     @Test
     public void testaaPakanNimi() {
-        assertEquals(NIMI, pakka.pakanNimi());
+        assertEquals(NIMI, pakka.getNimi());
     }
 
     @Test
     public void pakanKokoMuuttuuKunKorttiLisataan() {
-        assertEquals(0, pakka.pakanKoko());
+        assertEquals(0, pakka.getKoko());
         pakka.lisaaKortti(new Kortti("Etu", "Kaanto"));
-        assertEquals(1, pakka.pakanKoko());
+        assertEquals(1, pakka.getKoko());
     }
     
     @Test
