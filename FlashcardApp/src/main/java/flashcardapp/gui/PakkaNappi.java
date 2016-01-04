@@ -21,6 +21,7 @@ public class PakkaNappi extends JButton implements MouseListener {
         super.setBorderPainted(false);
         super.setContentAreaFilled(false);
         super.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        super.setAlignmentX(JButton.CENTER_ALIGNMENT);
         super.addActionListener(actionListener);
         super.addMouseListener(this);
     }
@@ -43,7 +44,7 @@ public class PakkaNappi extends JButton implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        
+
     }
 
     @Override

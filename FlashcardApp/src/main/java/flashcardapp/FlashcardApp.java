@@ -12,11 +12,10 @@ import java.util.Map;
  */
 public class FlashcardApp {
     private final Tietokanta tietokanta;
-    private Map<String, Pakka> pakat;
+    private List<Pakka> pakat;
     
     public FlashcardApp(Tietokanta tietokanta) {
         this.tietokanta = tietokanta;
-        this.pakat = new HashMap<>();
         lataaPakat();
     }
     
@@ -24,15 +23,14 @@ public class FlashcardApp {
      * Metodi lataa pakat tietokannasta sisäiseen säiliöön.
      */
     public void lataaPakat() {
-        //tyhjennä
-        tietokanta.lataaPakat().forEach(pakka -> pakat.put(pakka.getNimi(), pakka));
+        pakat = tietokanta.lataaPakat();
     }
     
     /**
      * Metodi tallentaa pakat tietokantaan.
      */
     public void tallennaPakat() {
-        tietokanta.tallennaPakat(getPakat());
+        tietokanta.tallennaPakat(pakat);
     }
     
     /**
@@ -45,16 +43,12 @@ public class FlashcardApp {
     }
     
     public List<Pakka> getPakat() {
-        return new ArrayList<>(pakat.values());
+        return pakat;
     }
     
-    public Pakka lisaaPakka(String nimi) { //bug cannot have decks with the same name... REDO
+    public Pakka lisaaPakka(String nimi) {
         Pakka pakka = new Pakka(nimi);
-        pakat.put(nimi, pakka);
+        pakat.add(pakka);
         return pakka;
-    }
-    
-    public Pakka haePakka(String nimi) {
-        return pakat.get(nimi);
     }
 }
