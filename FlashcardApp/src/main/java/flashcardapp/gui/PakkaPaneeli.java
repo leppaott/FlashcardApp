@@ -88,8 +88,6 @@ public class PakkaPaneeli extends JPanel implements MouseListener, ActionListene
         if (e.getSource() instanceof PakkaNappi) {
             PakkaNappi nappi = (PakkaNappi) e.getSource();
             nappi.vaihdaAlleviivausNapille();
-        } else if (e.getSource() instanceof PakkaPopupMenu) {
-            System.out.println("entered " + e);
         }
     }
 

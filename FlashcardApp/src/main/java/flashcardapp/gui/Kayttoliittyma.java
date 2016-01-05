@@ -7,6 +7,9 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+//TODO RESIZE
 
 /**
  * Luokka huolehtii käyttöliittymästä.
@@ -48,8 +51,11 @@ public class Kayttoliittyma implements Runnable {
         JLabel otsikko = new JLabel("Decks");
         otsikko.setFont(otsikko.getFont().deriveFont(16.0f));
         otsikko.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        frame.add(otsikko, BorderLayout.NORTH); //Center somehow
-
+        
+        JPanel top = new JPanel();
+        top.add(otsikko);
+        frame.add(top, BorderLayout.NORTH);
+        
         pakkaPaneeli = new PakkaPaneeli(this);
         paivitaPakkaPaneeli();
         frame.add(pakkaPaneeli);
@@ -58,10 +64,8 @@ public class Kayttoliittyma implements Runnable {
     public void paivitaPakkaPaneeli() {
         pakkaPaneeli.tyhjenna();
         for (Pakka pakka : app.getPakat()) {
-            System.out.println("pakka " + pakka.getNimi());
             pakkaPaneeli.lisaaPakkaNappi(pakka.getNimi());
         }
-        System.out.println("DONE\n");
         app.tallennaPakat();
     }
     
