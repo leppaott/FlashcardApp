@@ -3,7 +3,7 @@ package flashcardapp;
 import flashcardapp.database.Tietokanta;
 import flashcardapp.domain.Pakka;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,25 +12,31 @@ import java.util.Map;
  */
 public class FlashcardApp {
     private final Tietokanta tietokanta;
-    private List<Pakka> pakat;
+    private Map<String, Pakka> pakat;
     
     public FlashcardApp(Tietokanta tietokanta) {
         this.tietokanta = tietokanta;
-        lataaPakat();
+        this.pakat = new LinkedHashMap<>();
     }
     
     /**
      * Metodi lataa pakat tietokannasta sisäiseen säiliöön.
      */
     public void lataaPakat() {
-        pakat = tietokanta.lataaPakat();
+        pakat.clear();
+        tietokanta.lataaPakat().forEach(pakka -> pakat.put(pakka.getNimi(), pakka));
+    }
+    
+    public void lataaPakat(String tiedosto) {
+        tietokanta.setTiedosto(tiedosto);
+        lataaPakat();
     }
     
     /**
      * Metodi tallentaa pakat tietokantaan.
      */
     public void tallennaPakat() {
-        tietokanta.tallennaPakat(pakat);
+        tietokanta.tallennaPakat(getPakat());
     }
     
     /**
@@ -43,12 +49,18 @@ public class FlashcardApp {
     }
     
     public List<Pakka> getPakat() {
-        return pakat;
+        return new ArrayList<>(pakat.values());
     }
     
     public Pakka lisaaPakka(String nimi) {
         Pakka pakka = new Pakka(nimi);
-        pakat.add(pakka);
+        pakat.put(nimi, pakka);
         return pakka;
+    }
+    
+    public void poistaPakka(String nimi) {
+        if (pakat.containsKey(nimi)) {
+            pakat.remove(nimi);
+        }
     }
 }

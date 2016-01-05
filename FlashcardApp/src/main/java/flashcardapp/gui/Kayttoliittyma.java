@@ -1,11 +1,9 @@
 package flashcardapp.gui;
 
 import flashcardapp.FlashcardApp;
+import flashcardapp.domain.Pakka;
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,6 +20,7 @@ public class Kayttoliittyma implements Runnable {
 
     public Kayttoliittyma(FlashcardApp app) {
         this.app = app;
+        app.lataaPakat();
     }
 
     @Override
@@ -45,14 +44,29 @@ public class Kayttoliittyma implements Runnable {
     public void luoKomponentit() {
         menuBar = new MenuBar(this, app);
         frame.setJMenuBar(menuBar);
-        
+
         JLabel otsikko = new JLabel("Decks");
         otsikko.setFont(otsikko.getFont().deriveFont(16.0f));
         otsikko.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         frame.add(otsikko, BorderLayout.NORTH); //Center somehow
-        
+
         pakkaPaneeli = new PakkaPaneeli(this);
+        paivitaPakkaPaneeli();
         frame.add(pakkaPaneeli);
+    }
+
+    public void paivitaPakkaPaneeli() {
+        pakkaPaneeli.tyhjenna();
+        for (Pakka pakka : app.getPakat()) {
+            System.out.println("pakka " + pakka.getNimi());
+            pakkaPaneeli.lisaaPakkaNappi(pakka.getNimi());
+        }
+        System.out.println("DONE\n");
+        app.tallennaPakat();
+    }
+    
+    public void poistaPakkaNimella(String nimi) {
+        app.poistaPakka(nimi);
     }
 
     public JFrame getFrame() {
@@ -60,7 +74,9 @@ public class Kayttoliittyma implements Runnable {
     }
 
     public void paivita() {
+        paivitaPakkaPaneeli();
+
         frame.revalidate();
-        frame.repaint();    
+        frame.repaint();
     }
 }

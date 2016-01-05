@@ -26,7 +26,7 @@ public class TiedostoTietokanta implements Tietokanta {
 
     @Override
     public void setTiedosto(String tiedosto) {
-        if (!tiedosto.endsWith(".db")) {
+        if (!tiedosto.endsWith(".db")) { //set default type
             tiedosto += ".db";
         }
         this.tiedosto = tiedosto;

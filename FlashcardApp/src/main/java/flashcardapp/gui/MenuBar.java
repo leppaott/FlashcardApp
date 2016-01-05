@@ -2,9 +2,12 @@ package flashcardapp.gui;
 
 import flashcardapp.FlashcardApp;
 import java.awt.event.ActionEvent;
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Luokka laajentaa JMenuBar.
@@ -26,9 +29,6 @@ public class MenuBar extends JMenuBar {
         JMenuItem item = new JMenuItem("Open Database...");
         item.addActionListener(ae -> avaaTietokanta(ae));
         menu.add(item);
-        item = new JMenuItem("Save");
-        item.addActionListener(ae -> tallennaTietokanta(ae));
-        menu.add(item);
         item = new JMenuItem("Save As...");
         item.addActionListener(ae -> tallennaTietokantaNimella(ae));
         menu.add(item);
@@ -46,24 +46,30 @@ public class MenuBar extends JMenuBar {
     }
 
     public void avaaTietokanta(ActionEvent ae) {
-        //new AvaaTiedosto()
-        app.lataaPakat();
-        kayttoliittyma.paivita();
-    }
-
-    public void tallennaTietokanta(ActionEvent ae) {
-        app.tallennaPakat();
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileFilter(new FileNameExtensionFilter("Database", "db"));
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            app.lataaPakat(chooser.getSelectedFile().getPath());
+            kayttoliittyma.paivita();
+        }
     }
 
     public void tallennaTietokantaNimella(ActionEvent ae) {
-        //new SaveAs()
-        app.tallennaPakat("uusi");
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileFilter(new FileNameExtensionFilter("Database", "db"));
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            app.tallennaPakat(chooser.getSelectedFile().getPath());
+        }
     }
 
     public void lisaaPakka(ActionEvent ae) {
-        //new Dialog
-        app.lisaaPakka("UUSIPAKKA");
-        kayttoliittyma.paivita();
+        String pakanNimi = (String) JOptionPane.showInputDialog(kayttoliittyma.getFrame(),
+                "Give the deck a unique name", "New Deck", JOptionPane.PLAIN_MESSAGE);
+
+        if (pakanNimi != null && !pakanNimi.isEmpty()) {
+            app.lisaaPakka(pakanNimi);
+            kayttoliittyma.paivita();
+        }
     }
 
     public void lisaaKortteja(ActionEvent ae) {
