@@ -36,7 +36,9 @@ public class FlashcardApp {
      * Metodi tallentaa pakat tietokantaan.
      */
     public void tallennaPakat() {
-        tietokanta.tallennaPakat(getPakat());
+        if (pakat.size() > 0) {
+            tietokanta.tallennaPakat(getPakat());
+        }
     }
     
     /**

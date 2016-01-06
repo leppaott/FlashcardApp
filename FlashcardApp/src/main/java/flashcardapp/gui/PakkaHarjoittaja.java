@@ -12,6 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * PakkaHarjoittaja-paneeli luo pakan harjoitusta varten näkymän.
+ */
 public class PakkaHarjoittaja extends JPanel {
 
     private final Kayttoliittyma kayttoliittyma;
@@ -65,6 +68,10 @@ public class PakkaHarjoittaja extends JPanel {
         super.add(alapaneeli);
     }
 
+    /**
+     * Alustaa PakkaHarjoittajan annetulle pakalle.
+     * @param pakka Harjoitettava pakka.
+     */
     public void alusta(Pakka pakka) {
         this.pakka = pakka;
         this.kortti = 0;

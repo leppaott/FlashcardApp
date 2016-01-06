@@ -11,7 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 /**
- * Luokka laajentaa JPanel.
+ * PakkaPaneeli listaa Pakat käyttöliittymässä.
  */
 public class PakkaPaneeli extends JPanel  {
 

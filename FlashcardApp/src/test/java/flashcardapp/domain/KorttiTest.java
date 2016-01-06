@@ -33,4 +33,9 @@ public class KorttiTest {
         assertEquals("Finland", kortti.getEtupuoli());
         assertEquals("Suomi", kortti.getKaantopuoli());
     }
+    
+    @Test
+    public void lisaTiedotNull() {
+        assertEquals(null, kortti.getLisatiedot());
+    }
 }

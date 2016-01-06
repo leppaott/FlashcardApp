@@ -67,6 +67,9 @@ public class Kayttoliittyma implements Runnable {
         mainContainer = frame.getContentPane();
     }
 
+    /**
+     * Tyhjentää ja täyttää PakkaPaneelin.
+     */
     public void paivitaPakkaPaneeli() {
         pakkaPaneeli.tyhjenna();
         for (Pakka pakka : app.getPakat()) {
@@ -75,6 +78,10 @@ public class Kayttoliittyma implements Runnable {
         app.tallennaPakat();
     }
     
+    /**
+     *
+     * @param nimi
+     */
     public void poistaPakkaNimella(String nimi) {
         app.poistaPakka(nimi);
     }
@@ -88,21 +95,34 @@ public class Kayttoliittyma implements Runnable {
         paivitaFrame();
     }
     
+    /**
+     * Päivittää pääikkunan.
+     */
     public void paivitaFrame() {
         frame.revalidate();
         frame.repaint();
     }
 
+     /**
+     * Asettaa PakkaHarjoittajan näytettäväksi ja alustaa sen.
+     */
     public void harjoitaPakkaa(String nimi) {
         harjoittaja.alusta(app.haePakka(nimi));
         frame.setContentPane(harjoittaja);
         paivitaFrame();
     }
     
+    /**
+     * Asettaa päänäkymän näytettäväksi.
+     */
     public void asetaMainContainer() {
         frame.setContentPane(mainContainer);
     }
     
+    /**
+     * Asettaa MenuBarin näkyvyyden
+     * @param visible
+     */
     public void asetaMenuBarNakyvyys(boolean visible) {
         menuBar.setVisible(visible);
     }

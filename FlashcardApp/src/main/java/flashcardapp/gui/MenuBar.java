@@ -56,7 +56,7 @@ public class MenuBar extends JMenuBar {
         return null;
     } 
     
-    public void avaaTietokanta(ActionEvent ae) {
+    private void avaaTietokanta(ActionEvent ae) {
         JFileChooser chooser = getChooser();
         if (chooser != null) {
             app.lataaPakat(chooser.getSelectedFile().getPath());
@@ -64,14 +64,14 @@ public class MenuBar extends JMenuBar {
         }
     }
 
-    public void tallennaTietokantaNimella(ActionEvent ae) {
+    private void tallennaTietokantaNimella(ActionEvent ae) {
         JFileChooser chooser = getChooser();
         if (chooser != null) {
             app.tallennaPakat(chooser.getSelectedFile().getPath());
         }
     }
 
-    public void lisaaPakka(ActionEvent ae) {
+    private void lisaaPakka(ActionEvent ae) {
         String pakanNimi = (String) JOptionPane.showInputDialog(null,
                 "Give the deck a unique name", "New Deck", JOptionPane.PLAIN_MESSAGE);
 
@@ -81,7 +81,7 @@ public class MenuBar extends JMenuBar {
         }
     }
 
-    public void lisaaKortteja(ActionEvent ae) {
+    private void lisaaKortteja(ActionEvent ae) {
 
     }
 }
