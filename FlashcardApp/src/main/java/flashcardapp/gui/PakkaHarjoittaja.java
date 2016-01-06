@@ -3,12 +3,10 @@ package flashcardapp.gui;
 import flashcardapp.domain.Kortti;
 import flashcardapp.domain.Pakka;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -19,7 +17,7 @@ public class PakkaHarjoittaja extends JPanel {
     private final Kayttoliittyma kayttoliittyma;
     private JTextField textField;
     private JPanel alapaneeli;
-    private JButton nappi, backbutton;
+    private JButton nappi, backbutton, score;
     private Pakka pakka;
     private int kortti;
 
@@ -50,8 +48,19 @@ public class PakkaHarjoittaja extends JPanel {
         nappi = new JButton();
         nappi.addActionListener(e -> nappiaPainettu(e));
         alapaneeli.add(nappi, BorderLayout.CENTER);
+        
+        score = new JButton();
+        score.setBorder(null);
+        score.setBorderPainted(false);
+        score.setContentAreaFilled(false);
+        score.setFont(new Font("Arial", Font.PLAIN, 15));
+        
+        JPanel top = new JPanel(new BorderLayout());
+        top.setMaximumSize(new Dimension(1000, 20));
+        top.add(score, BorderLayout.WEST);
 
         super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        super.add(top);
         super.add(textField);
         super.add(alapaneeli);
     }
@@ -62,6 +71,7 @@ public class PakkaHarjoittaja extends JPanel {
 
         nappi.setText("Show Answer");
         backbutton.setVisible(true);
+        score.setText(kortti + "/" + pakka.getKoko());
         kayttoliittyma.asetaMenuBarNakyvyys(false);
 
         pakka.lisaaKortti(new Kortti("Helppo", "Easy"));
@@ -83,8 +93,6 @@ public class PakkaHarjoittaja extends JPanel {
         }
 
         JTextField field = new JTextField();
-        //field.setAlignmentX(JTextField.CENTER_ALIGNMENT);
-        //field.setAlignmentY(JTextField.CENTER_ALIGNMENT);
         field.setHorizontalAlignment(JTextField.CENTER);
         field.setEditable(false);
         field.setBackground(null);
@@ -93,7 +101,7 @@ public class PakkaHarjoittaja extends JPanel {
 
         return field;
     }
-
+    //TODO lisaTiedot()
     private void nappiaPainettu(ActionEvent e) {
         switch (nappi.getText()) {
             case "Show Answer":
@@ -108,6 +116,7 @@ public class PakkaHarjoittaja extends JPanel {
             case "Next":
                 nappi.setText("Show Answer");
                 textField.setText(pakka.getKortti(++kortti).getEtupuoli());
+                score.setText(kortti + "/" + pakka.getKoko());
                 break;
             case "Go Back":
                 kayttoliittyma.asetaMenuBarNakyvyys(true);
