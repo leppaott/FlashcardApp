@@ -1,6 +1,7 @@
 package flashcardapp.gui;
 
 import flashcardapp.FlashcardApp;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
@@ -16,6 +17,7 @@ public class MenuBar extends JMenuBar {
 
     private final Kayttoliittyma kayttoliittyma;
     private final FlashcardApp app;
+    private Container mainContainer, trainingContainer;
 
     public MenuBar(Kayttoliittyma kayttoliittyma, FlashcardApp app) {
         super();

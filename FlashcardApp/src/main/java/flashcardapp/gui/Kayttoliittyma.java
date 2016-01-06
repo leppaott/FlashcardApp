@@ -98,4 +98,12 @@ public class Kayttoliittyma implements Runnable {
         frame.setContentPane(harjoittaja);
         paivitaFrame();
     }
+    
+    public void asetaMainContainer() {
+        frame.setContentPane(mainContainer);
+    }
+    
+    public void asetaMenuBarNakyvyys(boolean visible) {
+        menuBar.setVisible(visible);
+    }
 }

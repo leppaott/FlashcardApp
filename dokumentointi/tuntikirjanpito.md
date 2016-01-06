@@ -23,5 +23,10 @@ pvm        | aika | kohde |
 **30.12.2015** | 2 h | käyttöliittymää |
 **1.1.2016** | 2 h  | käyttöliittymää |
 **2.1.2016** | 2 h  | MenuBar, käyttöliittymää |
+
+## Deadline 5
+pvm        | aika | kohde |
+-----------|------|-------|
 **4.1.2016** | 2 h  | PakkaPaneelia, käyttöliittymää |
 **5.1.2016** | 3 h  | käyttöliittymäää: tietokantojen avaus ja tallennus, popupMenu, pakkaPaneeli toimii |
+**6.1.2016** | 3 h  | käyttöliittymäää |
