@@ -32,21 +32,14 @@ public class TiedostoTietokanta implements Tietokanta {
         this.tiedosto = tiedosto;
     }
 
-    private boolean tiedostoOlemassa() {
-        return new File(tiedosto).exists();
-    }
-
     /**
      * Metodi lataa pakat tiedostosta.
+     *
      * @return Lista pakoista.
      */
     @Override
     public List<Pakka> lataaPakat() {
         List<Pakka> pakat = new ArrayList<>();
-
-        if (!tiedostoOlemassa()) {
-            return pakat;
-        }
 
         try (FileInputStream fis = new FileInputStream(tiedosto);
                 ObjectInputStream ois = new ObjectInputStream(fis)) {
@@ -56,14 +49,14 @@ public class TiedostoTietokanta implements Tietokanta {
                 pakka = (Pakka) ois.readObject();
             }
         } catch (Exception e) {
-            System.out.println("Poikkeus pakkojen lataamisessa");
         }
-
+        
         return pakat;
     }
 
     /**
      * Metodi tallentaa pakat tiedostoon.
+     *
      * @param pakat
      */
     @Override
@@ -75,7 +68,6 @@ public class TiedostoTietokanta implements Tietokanta {
             }
             oos.writeObject(null);
         } catch (Exception e) {
-            System.out.println("Poikkeus pakkojen tallentamisessa");
         }
     }
 

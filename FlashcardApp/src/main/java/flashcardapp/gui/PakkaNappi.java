@@ -38,4 +38,12 @@ public class PakkaNappi extends JButton {
 
         super.setFont(font.deriveFont(attribuutit));
     }
+    
+    public String getNimi() {
+        return super.getText();
+    }
+    
+    public void setNimi(String nimi) {
+        super.setText(nimi);
+    }
 }

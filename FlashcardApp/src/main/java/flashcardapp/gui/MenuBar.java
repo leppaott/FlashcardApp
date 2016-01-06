@@ -45,19 +45,26 @@ public class MenuBar extends JMenuBar {
         menu.add(item);
     }
 
-    public void avaaTietokanta(ActionEvent ae) {
+    private JFileChooser getChooser() {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter(new FileNameExtensionFilter("Database", "db"));
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            return chooser;
+        }
+        return null;
+    } 
+    
+    public void avaaTietokanta(ActionEvent ae) {
+        JFileChooser chooser = getChooser();
+        if (chooser != null) {
             app.lataaPakat(chooser.getSelectedFile().getPath());
             kayttoliittyma.paivita();
         }
     }
 
     public void tallennaTietokantaNimella(ActionEvent ae) {
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileFilter(new FileNameExtensionFilter("Database", "db"));
-        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+        JFileChooser chooser = getChooser();
+        if (chooser != null) {
             app.tallennaPakat(chooser.getSelectedFile().getPath());
         }
     }
