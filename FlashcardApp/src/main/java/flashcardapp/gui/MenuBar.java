@@ -70,7 +70,7 @@ public class MenuBar extends JMenuBar {
     }
 
     public void lisaaPakka(ActionEvent ae) {
-        String pakanNimi = (String) JOptionPane.showInputDialog(kayttoliittyma.getFrame(),
+        String pakanNimi = (String) JOptionPane.showInputDialog(null,
                 "Give the deck a unique name", "New Deck", JOptionPane.PLAIN_MESSAGE);
 
         if (pakanNimi != null && !pakanNimi.isEmpty()) {

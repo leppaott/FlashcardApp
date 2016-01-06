@@ -52,10 +52,15 @@ public class FlashcardApp {
         return new ArrayList<>(pakat.values());
     }
     
-    public Pakka lisaaPakka(String nimi) {
-        Pakka pakka = new Pakka(nimi);
-        pakat.put(nimi, pakka);
-        return pakka;
+    public Pakka haePakka(String nimi) {
+        if (pakat.containsKey(nimi)) {
+            return pakat.get(nimi);
+        }
+        return null;
+    }
+    
+    public void lisaaPakka(String nimi) {
+        pakat.put(nimi, new Pakka(nimi));
     }
     
     public void poistaPakka(String nimi) {

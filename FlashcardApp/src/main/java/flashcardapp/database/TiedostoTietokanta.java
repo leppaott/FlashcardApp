@@ -1,7 +1,6 @@
 package flashcardapp.database;
 
 import flashcardapp.domain.Pakka;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -70,5 +69,4 @@ public class TiedostoTietokanta implements Tietokanta {
         } catch (Exception e) {
         }
     }
-
 }

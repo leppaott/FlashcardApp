@@ -8,7 +8,7 @@ public class PakkaPopupMenu  extends JPopupMenu {
     private PakkaNappi nappi;
     
     public PakkaPopupMenu(ActionListener actionListener) {
-        JMenuItem item = new JMenuItem("Delete");
+        JMenuItem item = new JMenuItem("Delete"); //add rename
         item.addActionListener(actionListener);
         super.add(item);  
     }

@@ -3,6 +3,7 @@ package flashcardapp.gui;
 import flashcardapp.FlashcardApp;
 import flashcardapp.domain.Pakka;
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,8 +19,10 @@ public class Kayttoliittyma implements Runnable {
 
     private final FlashcardApp app;
     private JFrame frame;
+    private Container mainContainer;
     private MenuBar menuBar;
     private PakkaPaneeli pakkaPaneeli;
+    private PakkaHarjoittaja harjoittaja;
 
     public Kayttoliittyma(FlashcardApp app) {
         this.app = app;
@@ -59,6 +62,9 @@ public class Kayttoliittyma implements Runnable {
         pakkaPaneeli = new PakkaPaneeli(this);
         paivitaPakkaPaneeli();
         frame.add(pakkaPaneeli);
+        
+        harjoittaja = new PakkaHarjoittaja(this);
+        mainContainer = frame.getContentPane();
     }
 
     public void paivitaPakkaPaneeli() {
@@ -79,8 +85,17 @@ public class Kayttoliittyma implements Runnable {
 
     public void paivita() {
         paivitaPakkaPaneeli();
-
+        paivitaFrame();
+    }
+    
+    public void paivitaFrame() {
         frame.revalidate();
         frame.repaint();
+    }
+
+    public void harjoitaPakkaa(String nimi) {
+        harjoittaja.alusta(app.haePakka(nimi));
+        frame.setContentPane(harjoittaja);
+        paivitaFrame();
     }
 }

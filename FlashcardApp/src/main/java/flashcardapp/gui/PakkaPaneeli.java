@@ -80,7 +80,7 @@ public class PakkaPaneeli extends JPanel  {
             if (e.getSource() instanceof PakkaNappi) {
                 PakkaNappi nappi = (PakkaNappi) e.getSource();
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    lisaaPakkaNappi("LEFT");
+                    kayttoliittyma.harjoitaPakkaa(nappi.getNimi());
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
                     popup.setNappi(nappi);
                     popup.show(e.getComponent(), e.getX(), e.getY());
