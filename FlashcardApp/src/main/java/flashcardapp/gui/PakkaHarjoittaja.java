@@ -121,7 +121,7 @@ public class PakkaHarjoittaja extends JPanel {
             case "Next":
                 nappi.setText("Show Answer");
                 textField.setText(pakka.getKortti(++kortti).getEtupuoli());
-                score.setText((kortti + 1) + "/" + pakka.getKoko());
+                score.setText((kortti+1) + "/" + pakka.getKoko());
                 break;
             case "Go Back":
                 kayttoliittyma.asetaMenuBarNakyvyys(true);
