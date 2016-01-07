@@ -30,3 +30,8 @@ pvm        | aika | kohde |
 **4.1.2016** | 2 h  | PakkaPaneelia, käyttöliittymää |
 **5.1.2016** | 3 h  | käyttöliittymäää: tietokantojen avaus ja tallennus, popupMenu, pakkaPaneeli toimii |
 **6.1.2016** | 4 h  | käyttöliittymäää |
+
+## Deadline 6
+pvm        | aika | kohde |
+-----------|------|-------|
+**7.1.2016** | 4 h  | käyttöliittymän hiomista |

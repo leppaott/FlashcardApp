@@ -8,12 +8,13 @@ import java.awt.event.MouseListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
  * PakkaPaneeli listaa Pakat käyttöliittymässä.
  */
-public class PakkaPaneeli extends JPanel  {
+public class PakkaPaneeli extends JPanel {
 
     private final Kayttoliittyma kayttoliittyma;
     private final EventHandler handler;
@@ -69,8 +70,14 @@ public class PakkaPaneeli extends JPanel  {
             if (e.getSource() instanceof JMenuItem) {
                 JMenuItem item = (JMenuItem) e.getSource();
                 if (item.getText().equals("Delete")) {
-                    kayttoliittyma.poistaPakkaNimella(popup.getNappi().getNimi());
-                    kayttoliittyma.paivita();
+                    //JOptionPane do you really want to
+                    int vastaus = JOptionPane.showConfirmDialog(kayttoliittyma.getFrame(),
+                            "Do you really want to delete this deck?", "Confirm", 
+                            JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+                    if (vastaus == JOptionPane.YES_OPTION) {
+                        kayttoliittyma.poistaPakkaNimella(popup.getNappi().getNimi());
+                        kayttoliittyma.paivita();
+                    }
                 }
             }
         }
@@ -80,6 +87,7 @@ public class PakkaPaneeli extends JPanel  {
             if (e.getSource() instanceof PakkaNappi) {
                 PakkaNappi nappi = (PakkaNappi) e.getSource();
                 if (e.getButton() == MouseEvent.BUTTON1) {
+                    nappi.vaihdaAlleviivausNapille();
                     kayttoliittyma.harjoitaPakkaa(nappi.getNimi());
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
                     popup.setNappi(nappi);

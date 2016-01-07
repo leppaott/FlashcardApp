@@ -1,7 +1,6 @@
 package flashcardapp.gui;
 
 import flashcardapp.FlashcardApp;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
@@ -17,8 +16,7 @@ public class MenuBar extends JMenuBar {
 
     private final Kayttoliittyma kayttoliittyma;
     private final FlashcardApp app;
-    private Container mainContainer, trainingContainer;
-
+    
     public MenuBar(Kayttoliittyma kayttoliittyma, FlashcardApp app) {
         super();
         this.kayttoliittyma = kayttoliittyma;
@@ -72,16 +70,20 @@ public class MenuBar extends JMenuBar {
     }
 
     private void lisaaPakka(ActionEvent ae) {
-        String pakanNimi = (String) JOptionPane.showInputDialog(null,
+        String pakanNimi = (String) JOptionPane.showInputDialog(kayttoliittyma.getFrame(),
                 "Give the deck a unique name", "New Deck", JOptionPane.PLAIN_MESSAGE);
 
-        if (pakanNimi != null && !pakanNimi.isEmpty()) {
+        if (pakanNimi == null || pakanNimi.isEmpty()) {
+            JOptionPane.showMessageDialog(kayttoliittyma.getFrame(), "Please give a deck name.");
+        } else if (!pakanNimi.isEmpty() && app.haePakka(pakanNimi) == null) {
             app.lisaaPakka(pakanNimi);
             kayttoliittyma.paivita();
+        } else {
+            JOptionPane.showMessageDialog(kayttoliittyma.getFrame(), "Please give a deck unique name.");
         }
     }
 
     private void lisaaKortteja(ActionEvent ae) {
-
+        kayttoliittyma.lisaaPakkoja();
     }
 }

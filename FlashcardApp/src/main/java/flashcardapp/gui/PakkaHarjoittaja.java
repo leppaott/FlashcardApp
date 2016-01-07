@@ -1,6 +1,5 @@
 package flashcardapp.gui;
 
-import flashcardapp.domain.Kortti;
 import flashcardapp.domain.Pakka;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -47,17 +46,17 @@ public class PakkaHarjoittaja extends JPanel {
             kayttoliittyma.paivitaFrame();
         });
         alapaneeli.add(backbutton, BorderLayout.WEST);
-        
+
         nappi = new JButton();
         nappi.addActionListener(e -> nappiaPainettu(e));
         alapaneeli.add(nappi, BorderLayout.CENTER);
-        
+
         score = new JButton();
         score.setBorder(null);
         score.setBorderPainted(false);
         score.setContentAreaFilled(false);
-        score.setFont(new Font("Arial", Font.PLAIN, 15));
-        
+        score.setFont(new Font("Arial", Font.PLAIN, 20));
+
         JPanel top = new JPanel(new BorderLayout());
         top.setMaximumSize(new Dimension(1000, 20));
         top.add(score, BorderLayout.WEST);
@@ -70,6 +69,7 @@ public class PakkaHarjoittaja extends JPanel {
 
     /**
      * Alustaa PakkaHarjoittajan annetulle pakalle.
+     *
      * @param pakka Harjoitettava pakka.
      */
     public void alusta(Pakka pakka) {
@@ -78,13 +78,9 @@ public class PakkaHarjoittaja extends JPanel {
 
         nappi.setText("Show Answer");
         backbutton.setVisible(true);
-        score.setText(kortti + "/" + pakka.getKoko());
+        score.setText("1/" + pakka.getKoko());
         kayttoliittyma.asetaMenuBarNakyvyys(false);
 
-        pakka.lisaaKortti(new Kortti("Helppo", "Easy"));
-        pakka.lisaaKortti(new Kortti("ruotsalainen", "Swedish"));
-        pakka.lisaaKortti(new Kortti("saksalainen", "German"));
-        
         if (pakka.getKoko() != 0) {
             textField.setText(pakka.getKortti(kortti).getEtupuoli());
         } else {
@@ -104,11 +100,13 @@ public class PakkaHarjoittaja extends JPanel {
         field.setEditable(false);
         field.setBackground(null);
         field.setBorder(BorderFactory.createEmptyBorder());
-        field.setFont(new Font("Arial", Font.PLAIN, 20));
+        field.setFont(new Font("Arial", Font.PLAIN, 30));
 
         return field;
     }
+
     //TODO lisaTiedot()
+
     private void nappiaPainettu(ActionEvent e) {
         switch (nappi.getText()) {
             case "Show Answer":
@@ -123,7 +121,7 @@ public class PakkaHarjoittaja extends JPanel {
             case "Next":
                 nappi.setText("Show Answer");
                 textField.setText(pakka.getKortti(++kortti).getEtupuoli());
-                score.setText(kortti + "/" + pakka.getKoko());
+                score.setText((kortti + 1) + "/" + pakka.getKoko());
                 break;
             case "Go Back":
                 kayttoliittyma.asetaMenuBarNakyvyys(true);

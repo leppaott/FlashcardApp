@@ -5,6 +5,7 @@ import flashcardapp.domain.Pakka;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,6 +24,7 @@ public class Kayttoliittyma implements Runnable {
     private MenuBar menuBar;
     private PakkaPaneeli pakkaPaneeli;
     private PakkaHarjoittaja harjoittaja;
+    private KorttiLisaaja korttiLisaaja;
 
     public Kayttoliittyma(FlashcardApp app) {
         this.app = app;
@@ -52,7 +54,7 @@ public class Kayttoliittyma implements Runnable {
         frame.setJMenuBar(menuBar);
 
         JLabel otsikko = new JLabel("Decks");
-        otsikko.setFont(otsikko.getFont().deriveFont(16.0f));
+        otsikko.setFont(otsikko.getFont().deriveFont(20.0f));
         otsikko.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         
         JPanel top = new JPanel();
@@ -63,8 +65,10 @@ public class Kayttoliittyma implements Runnable {
         paivitaPakkaPaneeli();
         frame.add(pakkaPaneeli);
         
+        korttiLisaaja = new KorttiLisaaja(this, app);
         harjoittaja = new PakkaHarjoittaja(this);
         mainContainer = frame.getContentPane();
+        
     }
 
     /**
@@ -109,6 +113,13 @@ public class Kayttoliittyma implements Runnable {
     public void harjoitaPakkaa(String nimi) {
         harjoittaja.alusta(app.haePakka(nimi));
         frame.setContentPane(harjoittaja);
+        paivitaFrame();
+    }
+    
+    public void lisaaPakkoja() {
+        asetaMenuBarNakyvyys(false);
+        korttiLisaaja.alusta();
+        frame.setContentPane(korttiLisaaja);
         paivitaFrame();
     }
     
