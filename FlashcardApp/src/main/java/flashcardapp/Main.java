@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
         FlashcardApp app = new FlashcardApp(new TiedostoTietokanta());
-        Kayttoliittyma kali = new Kayttoliittyma(app);
-        SwingUtilities.invokeLater(kali);
+        Kayttoliittyma gui = new Kayttoliittyma(app);
+        SwingUtilities.invokeLater(gui);
     }
 }

@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  */
 public class PakkaHarjoittaja extends JPanel {
 
-    private final Kayttoliittyma kayttoliittyma;
+    private final Kayttoliittyma gui;
     private JTextField textField;
     private JPanel alapaneeli;
     private JButton nappi, backbutton, score;
@@ -25,25 +25,31 @@ public class PakkaHarjoittaja extends JPanel {
 
     /**
      *
-     * @param kayttoliittyma
+     * @param gui
      */
-    public PakkaHarjoittaja(Kayttoliittyma kayttoliittyma) {
+    public PakkaHarjoittaja(Kayttoliittyma gui) {
         super();
-        this.kayttoliittyma = kayttoliittyma;
+        this.gui = gui;
         luoKomponentit();
     }
 
     private void luoKomponentit() {
-        textField = getTextField();
+        textField = new JTextField();
+        textField.setHorizontalAlignment(JTextField.CENTER);
+        textField.setEditable(false);
+        textField.setBackground(null);
+        textField.setBorder(BorderFactory.createEmptyBorder());
+        textField.setFont(new Font("Arial", Font.PLAIN, 30));
+
         alapaneeli = new JPanel(new BorderLayout());
         alapaneeli.setAlignmentY(JPanel.BOTTOM_ALIGNMENT);
         alapaneeli.setMaximumSize(new Dimension(1000, 20));
 
         backbutton = new JButton("Go Back");
         backbutton.addActionListener(e -> {
-            kayttoliittyma.asetaMenuBarNakyvyys(true);
-            kayttoliittyma.asetaMainContainer();
-            kayttoliittyma.paivitaFrame();
+            gui.asetaMenuBarNakyvyys(true);
+            gui.asetaMainContainer();
+            gui.paivitaFrame();
         });
         alapaneeli.add(backbutton, BorderLayout.WEST);
 
@@ -77,35 +83,13 @@ public class PakkaHarjoittaja extends JPanel {
         this.kortti = 0;
 
         nappi.setText("Show Answer");
-        backbutton.setVisible(true);
         score.setText("1/" + pakka.getKoko());
-        kayttoliittyma.asetaMenuBarNakyvyys(false);
+        textField.setText(pakka.getKortti(kortti).getEtupuoli());
+        backbutton.setVisible(true);
 
-        if (pakka.getKoko() != 0) {
-            textField.setText(pakka.getKortti(kortti).getEtupuoli());
-        } else {
-            nappi.setText("Go Back");
-        }
-
-        kayttoliittyma.paivitaFrame();
+        gui.asetaMenuBarNakyvyys(false);
+        gui.paivitaFrame();
     }
-
-    private JTextField getTextField() {
-        if (textField != null) {
-            return textField;
-        }
-
-        JTextField field = new JTextField();
-        field.setHorizontalAlignment(JTextField.CENTER);
-        field.setEditable(false);
-        field.setBackground(null);
-        field.setBorder(BorderFactory.createEmptyBorder());
-        field.setFont(new Font("Arial", Font.PLAIN, 30));
-
-        return field;
-    }
-
-    //TODO lisaTiedot()
 
     private void nappiaPainettu(ActionEvent e) {
         switch (nappi.getText()) {
@@ -116,19 +100,19 @@ public class PakkaHarjoittaja extends JPanel {
                     nappi.setText("Go Back");
                     backbutton.setVisible(false);
                 }
-                textField.setText(pakka.getKortti(kortti).getKaantopuoli());
+                textField.setText(pakka.getKortti(kortti++).getKaantopuoli());
                 break;
             case "Next":
                 nappi.setText("Show Answer");
-                textField.setText(pakka.getKortti(++kortti).getEtupuoli());
-                score.setText((kortti+1) + "/" + pakka.getKoko());
+                textField.setText(pakka.getKortti(kortti).getEtupuoli());
+                score.setText((kortti + 1) + "/" + pakka.getKoko());
                 break;
             case "Go Back":
-                kayttoliittyma.asetaMenuBarNakyvyys(true);
-                kayttoliittyma.asetaMainContainer();
+                gui.asetaMenuBarNakyvyys(true);
+                gui.asetaMainContainer();
                 break;
         }
 
-        kayttoliittyma.paivitaFrame();
+        gui.paivitaFrame();
     }
 }

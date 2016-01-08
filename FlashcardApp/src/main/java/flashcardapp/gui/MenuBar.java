@@ -14,12 +14,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class MenuBar extends JMenuBar {
 
-    private final Kayttoliittyma kayttoliittyma;
+    private final Kayttoliittyma gui;
     private final FlashcardApp app;
     
-    public MenuBar(Kayttoliittyma kayttoliittyma, FlashcardApp app) {
+    public MenuBar(Kayttoliittyma gui, FlashcardApp app) {
         super();
-        this.kayttoliittyma = kayttoliittyma;
+        this.gui = gui;
         this.app = app;
 
         JMenu menu = new JMenu("File");
@@ -58,7 +58,8 @@ public class MenuBar extends JMenuBar {
         JFileChooser chooser = getChooser();
         if (chooser != null) {
             app.lataaPakat(chooser.getSelectedFile().getPath());
-            kayttoliittyma.paivita();
+            gui.taytaPakkaPaneeli();
+            gui.paivitaFrame();
         }
     }
 
@@ -70,20 +71,21 @@ public class MenuBar extends JMenuBar {
     }
 
     private void lisaaPakka(ActionEvent ae) {
-        String pakanNimi = (String) JOptionPane.showInputDialog(kayttoliittyma.getFrame(),
+        String pakanNimi = (String) JOptionPane.showInputDialog(gui.getFrame(),
                 "Give the deck a unique name", "New Deck", JOptionPane.PLAIN_MESSAGE);
 
         if (pakanNimi == null || pakanNimi.isEmpty()) {
-            JOptionPane.showMessageDialog(kayttoliittyma.getFrame(), "Please give a deck name.");
+            JOptionPane.showMessageDialog(gui.getFrame(), "Please give a deck name.");
         } else if (!pakanNimi.isEmpty() && app.haePakka(pakanNimi) == null) {
             app.lisaaPakka(pakanNimi);
-            kayttoliittyma.paivita();
+            gui.taytaPakkaPaneeli();
+            gui.paivitaFrame();
         } else {
-            JOptionPane.showMessageDialog(kayttoliittyma.getFrame(), "Please give a deck unique name.");
+            JOptionPane.showMessageDialog(gui.getFrame(), "Please give a deck unique name.");
         }
     }
 
     private void lisaaKortteja(ActionEvent ae) {
-        kayttoliittyma.lisaaPakkoja();
+        gui.lisaaPakkoja();
     }
 }

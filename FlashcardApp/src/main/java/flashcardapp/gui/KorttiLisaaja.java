@@ -14,15 +14,17 @@ import javax.swing.JTextField;
  */
 public class KorttiLisaaja extends JPanel {
 
-    private final Kayttoliittyma kayttoliittyma;
-    private FlashcardApp app;
+    private final Kayttoliittyma gui;
+    private final FlashcardApp app;
     private Pakka pakka;
 
     /**
      * Creates new form KorttiLisaajaBuilder
+     * @param gui
+     * @param app
      */
-    public KorttiLisaaja(Kayttoliittyma kayttoliittyma, FlashcardApp app) {
-        this.kayttoliittyma = kayttoliittyma;
+    public KorttiLisaaja(Kayttoliittyma gui, FlashcardApp app) {
+        this.gui = gui;
         this.app = app;
         initComponents();
     }
@@ -38,7 +40,7 @@ public class KorttiLisaaja extends JPanel {
             jComboBox1.addItem(pakka.getNimi());
         }
         alustaPaneeli(pakka.getNimi());
-        kayttoliittyma.asetaMenuBarNakyvyys(false);
+        gui.asetaMenuBarNakyvyys(false);
     }
 
     private void alustaPaneeli(String pakanNimi) {
@@ -54,7 +56,7 @@ public class KorttiLisaaja extends JPanel {
             }
         }
 
-        kayttoliittyma.paivitaFrame();
+        gui.paivitaFrame();
     }
 
     private void initComponents() {
@@ -157,22 +159,22 @@ public class KorttiLisaaja extends JPanel {
             jTextArea1.setText(null);
             jTextArea2.setText(null);
             alustaPaneeli(pakka.getNimi());
-            kayttoliittyma.paivitaFrame();
+            gui.paivitaFrame();
         }
     }
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
         pakka = null;
         app.tallennaPakat();
-        kayttoliittyma.asetaMenuBarNakyvyys(true);
-        kayttoliittyma.asetaMainContainer();
+        gui.asetaMenuBarNakyvyys(true);
+        gui.asetaMainContainer();
     }
 
     private void comboBoxAction(ActionEvent e) {
         JComboBox cb = (JComboBox) e.getSource();
         String valittu = (String) cb.getSelectedItem();
         alustaPaneeli(valittu);
-        kayttoliittyma.paivitaFrame();
+        gui.paivitaFrame();
     }
 
     private javax.swing.JButton addButton;

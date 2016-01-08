@@ -5,14 +5,14 @@ import flashcardapp.domain.Pakka;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.image.BufferedImage;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 //TODO RESIZE
-
 /**
  * Luokka huolehtii käyttöliittymästä.
  */
@@ -56,49 +56,26 @@ public class Kayttoliittyma implements Runnable {
         JLabel otsikko = new JLabel("Decks");
         otsikko.setFont(otsikko.getFont().deriveFont(20.0f));
         otsikko.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        
+
         JPanel top = new JPanel();
         top.add(otsikko);
         frame.add(top, BorderLayout.NORTH);
-        
-        pakkaPaneeli = new PakkaPaneeli(this);
-        paivitaPakkaPaneeli();
+
+        pakkaPaneeli = new PakkaPaneeli(this, app);
         frame.add(pakkaPaneeli);
-        
+        taytaPakkaPaneeli();
+
         korttiLisaaja = new KorttiLisaaja(this, app);
         harjoittaja = new PakkaHarjoittaja(this);
         mainContainer = frame.getContentPane();
-        
-    }
 
-    /**
-     * Tyhjentää ja täyttää PakkaPaneelin.
-     */
-    public void paivitaPakkaPaneeli() {
-        pakkaPaneeli.tyhjenna();
-        for (Pakka pakka : app.getPakat()) {
-            pakkaPaneeli.lisaaPakkaNappi(pakka.getNimi());
-        }
-        app.tallennaPakat();
-    }
-    
-    /**
-     *
-     * @param nimi
-     */
-    public void poistaPakkaNimella(String nimi) {
-        app.poistaPakka(nimi);
+        frame.addComponentListener(new ResizeHandler());
     }
 
     public JFrame getFrame() {
         return frame;
     }
 
-    public void paivita() {
-        paivitaPakkaPaneeli();
-        paivitaFrame();
-    }
-    
     /**
      * Päivittää pääikkunan.
      */
@@ -107,34 +84,65 @@ public class Kayttoliittyma implements Runnable {
         frame.repaint();
     }
 
-     /**
-     * Asettaa PakkaHarjoittajan näytettäväksi ja alustaa sen.
-     */
-    public void harjoitaPakkaa(String nimi) {
-        harjoittaja.alusta(app.haePakka(nimi));
-        frame.setContentPane(harjoittaja);
-        paivitaFrame();
-    }
-    
-    public void lisaaPakkoja() {
-        asetaMenuBarNakyvyys(false);
-        korttiLisaaja.alusta();
-        frame.setContentPane(korttiLisaaja);
-        paivitaFrame();
-    }
-    
     /**
      * Asettaa päänäkymän näytettäväksi.
      */
     public void asetaMainContainer() {
         frame.setContentPane(mainContainer);
     }
-    
+
     /**
      * Asettaa MenuBarin näkyvyyden
+     *
      * @param visible
      */
     public void asetaMenuBarNakyvyys(boolean visible) {
         menuBar.setVisible(visible);
+    }
+
+    /**
+     * Tyhjentää ja täyttää PakkaPaneelin.
+     */
+    public void taytaPakkaPaneeli() {
+        pakkaPaneeli.tayta();
+    }
+
+    /**
+     * Asettaa PakkaHarjoittajan näytettäväksi ja alustaa sen.
+     *
+     * @param nimi
+     */
+    public void harjoitaPakkaa(String nimi) {
+        harjoittaja.alusta(app.haePakka(nimi));
+        frame.setContentPane(harjoittaja);
+        paivitaFrame();
+    }
+
+    public void lisaaPakkoja() {
+        korttiLisaaja.alusta();
+        frame.setContentPane(korttiLisaaja);
+        paivitaFrame();
+    }
+    
+    private class ResizeHandler implements ComponentListener {
+
+        @Override
+        public void componentResized(ComponentEvent e) {
+            taytaPakkaPaneeli();
+            paivitaFrame();
+        }
+
+        @Override
+        public void componentMoved(ComponentEvent e) {
+        }
+
+        @Override
+        public void componentShown(ComponentEvent e) {
+        }
+
+        @Override
+        public void componentHidden(ComponentEvent e) {
+        }
+        
     }
 }

@@ -1,5 +1,7 @@
 package flashcardapp.gui;
 
+import flashcardapp.FlashcardApp;
+import flashcardapp.domain.Pakka;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,13 +18,15 @@ import javax.swing.JPanel;
  */
 public class PakkaPaneeli extends JPanel {
 
-    private final Kayttoliittyma kayttoliittyma;
+    private final Kayttoliittyma gui;
+    private final FlashcardApp app;
     private final EventHandler handler;
     private final PakkaPopupMenu popup;
 
-    public PakkaPaneeli(Kayttoliittyma kayttoliittyma) {
+    public PakkaPaneeli(Kayttoliittyma gui, FlashcardApp app) {
         super();
-        this.kayttoliittyma = kayttoliittyma;
+        this.gui = gui;
+        this.app = app;
         this.handler = new EventHandler();
         this.popup = new PakkaPopupMenu(handler);
 
@@ -37,79 +41,93 @@ public class PakkaPaneeli extends JPanel {
         paneeli.setLayout(new BoxLayout(paneeli, BoxLayout.Y_AXIS));
         paneeli.setAlignmentX(JPanel.CENTER_ALIGNMENT);
         paneeli.setAlignmentY(JPanel.TOP_ALIGNMENT);
-        paneeli.setMaximumSize(kayttoliittyma.getFrame().getSize());
+        paneeli.setMaximumSize(gui.getFrame().getSize());
 
         super.add(paneeli);
         super.add(Box.createHorizontalGlue());
         return paneeli;
     }
 
+    private int maxKomponenttejaSarakkeessa(int korkeus, int komponenttiKorkeus) {
+        if (korkeus == 0 || komponenttiKorkeus == 0) { //korkeus zero upon launch
+            return 10;
+        } //26 "Decks" height
+        return (korkeus - 26) / komponenttiKorkeus;
+    }
+
     public void lisaaPakkaNappi(String nimi) {
         JPanel paneeli = (JPanel) super.getComponent(super.getComponentCount() - 2);
+        PakkaNappi nappi = new PakkaNappi(nimi, handler);
 
-        int max = kayttoliittyma.getFrame().getHeight() / 12; //
-        if (paneeli.getComponentCount() > max) {
+        int max = maxKomponenttejaSarakkeessa(gui.getFrame().getContentPane().getHeight(),
+                nappi.getHeight() + 10);
+        if (paneeli.getComponentCount() >= max) {
             paneeli = lisaaPaneeli();
         }
 
         paneeli.add(Box.createRigidArea(new Dimension(0, 5)));
-        paneeli.add(new PakkaNappi(nimi, handler));
+        paneeli.add(nappi);
         paneeli.add(Box.createRigidArea(new Dimension(0, 5)));
     }
 
-    public void tyhjenna() {
+    private void tyhjennaPakoista() {
         super.removeAll();
         super.add(Box.createHorizontalGlue());
         lisaaPaneeli();
+    }
+
+    public void tayta() {
+        tyhjennaPakoista();
+        for (Pakka pakka : app.getPakat()) {
+            lisaaPakkaNappi(pakka.getNimi());
+        }
+        app.tallennaPakat();
     }
 
     private class EventHandler implements ActionListener, MouseListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() instanceof JMenuItem) {
-                JMenuItem item = (JMenuItem) e.getSource();
-                if (item.getText().equals("Delete")) {
-                    //JOptionPane do you really want to
-                    int vastaus = JOptionPane.showConfirmDialog(kayttoliittyma.getFrame(),
-                            "Do you really want to delete this deck?", "Confirm", 
-                            JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-                    if (vastaus == JOptionPane.YES_OPTION) {
-                        kayttoliittyma.poistaPakkaNimella(popup.getNappi().getNimi());
-                        kayttoliittyma.paivita();
-                    }
+            JMenuItem item = (JMenuItem) e.getSource();
+            if (item.getText().equals("Delete")) {
+                int vastaus = JOptionPane.showConfirmDialog(gui.getFrame(),
+                        "Do you really want to delete this deck?", "Confirm",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+                if (vastaus == JOptionPane.YES_OPTION) {
+                    app.poistaPakka(popup.getNappi().getNimi());
+                    gui.taytaPakkaPaneeli();
+                    gui.paivitaFrame();
                 }
             }
         }
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            if (e.getSource() instanceof PakkaNappi) {
-                PakkaNappi nappi = (PakkaNappi) e.getSource();
-                if (e.getButton() == MouseEvent.BUTTON1) {
+            PakkaNappi nappi = (PakkaNappi) e.getSource();
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                if (app.haePakka(nappi.getNimi()).getKoko() > 0) {
                     nappi.vaihdaAlleviivausNapille();
-                    kayttoliittyma.harjoitaPakkaa(nappi.getNimi());
-                } else if (e.getButton() == MouseEvent.BUTTON3) {
-                    popup.setNappi(nappi);
-                    popup.show(e.getComponent(), e.getX(), e.getY());
+                    gui.harjoitaPakkaa(nappi.getNimi());
+                } else {
+                    JOptionPane.showMessageDialog(gui.getFrame(),
+                            "The deck is empty. Add cards before practicing.");
                 }
+            } else if (e.getButton() == MouseEvent.BUTTON3) {
+                popup.setNappi(nappi);
+                popup.show(e.getComponent(), e.getX(), e.getY());
             }
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            if (e.getSource() instanceof PakkaNappi) {
-                PakkaNappi nappi = (PakkaNappi) e.getSource();
-                nappi.vaihdaAlleviivausNapille();
-            }
+            PakkaNappi nappi = (PakkaNappi) e.getSource();
+            nappi.vaihdaAlleviivausNapille();
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            if (e.getSource() instanceof PakkaNappi) {
-                PakkaNappi nappi = (PakkaNappi) e.getSource();
-                nappi.vaihdaAlleviivausNapille();
-            }
+            PakkaNappi nappi = (PakkaNappi) e.getSource();
+            nappi.vaihdaAlleviivausNapille();
         }
 
         @Override
