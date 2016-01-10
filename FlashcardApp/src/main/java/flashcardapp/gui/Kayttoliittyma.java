@@ -1,7 +1,6 @@
 package flashcardapp.gui;
 
 import flashcardapp.FlashcardApp;
-import flashcardapp.domain.Pakka;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -9,12 +8,10 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-//TODO RESIZE
 /**
- * Luokka huolehtii käyttöliittymästä.
+ * Main GUI class.
  */
 public class Kayttoliittyma implements Runnable {
 
@@ -45,11 +42,7 @@ public class Kayttoliittyma implements Runnable {
         frame.setVisible(true);
     }
 
-    public void messageBox(String text) {
-        JOptionPane.showMessageDialog(frame, text);
-    }
-
-    public void luoKomponentit() {
+    private void luoKomponentit() {
         menuBar = new MenuBar(this, app);
         frame.setJMenuBar(menuBar);
 
@@ -77,7 +70,7 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Päivittää pääikkunan.
+     * Updates the main frame.
      */
     public void paivitaFrame() {
         frame.revalidate();
@@ -85,32 +78,32 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Asettaa päänäkymän näytettäväksi.
+     * Methods sets the default view.
      */
     public void asetaMainContainer() {
         frame.setContentPane(mainContainer);
     }
 
     /**
-     * Asettaa MenuBarin näkyvyyden
+     * Method sets menu bar visibility.
      *
-     * @param visible
+     * @param visible visibility
      */
     public void asetaMenuBarNakyvyys(boolean visible) {
         menuBar.setVisible(visible);
     }
 
     /**
-     * Tyhjentää ja täyttää PakkaPaneelin.
+     * Clears and fills the deck panel.
      */
     public void taytaPakkaPaneeli() {
         pakkaPaneeli.tayta();
     }
 
     /**
-     * Asettaa PakkaHarjoittajan näytettäväksi ja alustaa sen.
+     * Method sets a deck training view to be shown.
      *
-     * @param nimi
+     * @param nimi deck name
      */
     public void harjoitaPakkaa(String nimi) {
         harjoittaja.alusta(app.haePakka(nimi));
@@ -118,6 +111,9 @@ public class Kayttoliittyma implements Runnable {
         paivitaFrame();
     }
 
+    /**
+     *  Method sets a card adder view to be shown.
+     */
     public void lisaaPakkoja() {
         korttiLisaaja.alusta();
         frame.setContentPane(korttiLisaaja);

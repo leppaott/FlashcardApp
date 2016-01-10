@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Luokka laajentaa Korttia sallimalla lisätiedon käyttämisen.
+ * Extended card with extra information.
  */
 public class LaajennettuKortti extends Kortti {
-    private List<String> lisatiedot;
+    private final List<String> lisatiedot;
     
     public LaajennettuKortti(String etupuoli, String kaantopuoli) {
         super(etupuoli, kaantopuoli);
@@ -15,8 +15,8 @@ public class LaajennettuKortti extends Kortti {
     }
 
     /**
-     * Metodilla lisää tiedon listaan.
-     * @param tieto
+     * Methods adds extra info.
+     * @param tieto info
      */
     public void lisaaTietoa(String tieto) {
         lisatiedot.add(tieto);

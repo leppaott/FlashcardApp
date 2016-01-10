@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * PakkaPaneeli listaa Pakat käyttöliittymässä.
+ * Default view with a list of decks.
  */
 public class PakkaPaneeli extends JPanel {
 
@@ -55,6 +55,10 @@ public class PakkaPaneeli extends JPanel {
         return (korkeus - 26) / komponenttiKorkeus;
     }
 
+    /**
+     * Methods adds a new deck button for a given name.
+     * @param nimi deck name
+     */
     public void lisaaPakkaNappi(String nimi) {
         JPanel paneeli = (JPanel) super.getComponent(super.getComponentCount() - 2);
         PakkaNappi nappi = new PakkaNappi(nimi, handler);
@@ -76,6 +80,9 @@ public class PakkaPaneeli extends JPanel {
         lisaaPaneeli();
     }
 
+    /**
+     * Method clears and fills the view
+     */
     public void tayta() {
         tyhjennaPakoista();
         for (Pakka pakka : app.getPakat()) {

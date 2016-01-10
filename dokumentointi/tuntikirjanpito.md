@@ -35,3 +35,4 @@ pvm        | aika | kohde |
 pvm        | aika | kohde |
 -----------|------|-------|
 **7.1.2016** | 4 h  | käyttöliittymän hiomista |
+**10.1.2016** | 2 h  | loppupalautus, javadoc |

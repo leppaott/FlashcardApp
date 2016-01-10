@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Yksinkertainen tietokanta.
+ * Simple flat file database
  */
 public class TiedostoTietokanta implements Tietokanta {
 
@@ -23,6 +23,7 @@ public class TiedostoTietokanta implements Tietokanta {
         this.tiedosto = tiedosto;
     }
 
+
     @Override
     public void setTiedosto(String tiedosto) {
         if (!tiedosto.endsWith(".db")) {
@@ -32,9 +33,9 @@ public class TiedostoTietokanta implements Tietokanta {
     }
 
     /**
-     * Metodi lataa pakat tiedostosta.
+     * Method loads decks from a file and returns a list of them.
      *
-     * @return Lista pakoista.
+     * @return decks
      */
     @Override
     public List<Pakka> lataaPakat() {
@@ -48,15 +49,16 @@ public class TiedostoTietokanta implements Tietokanta {
                 pakka = (Pakka) ois.readObject();
             }
         } catch (Exception e) {
+            return pakat;
         }
         
         return pakat;
     }
 
     /**
-     * Metodi tallentaa pakat tiedostoon.
+     * Method saves decks to a file.
      *
-     * @param pakat
+     * @param pakat decks
      */
     @Override
     public void tallennaPakat(List<Pakka> pakat) {
@@ -67,6 +69,7 @@ public class TiedostoTietokanta implements Tietokanta {
             }
             oos.writeObject(null);
         } catch (Exception e) {
+            return;
         }
     }
 }

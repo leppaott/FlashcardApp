@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Luokka Kortti sisältää kortille tarvittavat palvelut.
+ * Class represents a card.
  */
 public class Kortti implements Serializable {
 
@@ -32,7 +32,7 @@ public class Kortti implements Serializable {
     }
     
     /**
-     * Metodi kääntää etupuolen takapuoleksi ja toisinpäin.
+     * Method reverses card sides.
      */
     public void kaannaPuolet() {
         String etu = etupuoli;
@@ -41,8 +41,9 @@ public class Kortti implements Serializable {
     }
     
     /**
-     * Metodi palauttaa null. 
+     * Returns always null.
      * 
+     * @return null
      * @see LaajennettuKortti
      */
     public List<String> getLisatiedot() {

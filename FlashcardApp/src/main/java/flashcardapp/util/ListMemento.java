@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Luokka tallentaa listan tilan, jotta se voitaisiin palauttaa myöhemmin. Huom ArrayList!
+ * Class stores a state of a List as an ArrayList.
  */
 public class ListMemento<E> implements Serializable {
     private final List<E> tila;

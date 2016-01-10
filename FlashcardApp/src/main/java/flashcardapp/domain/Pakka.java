@@ -6,17 +6,16 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.Objects;
 
 /**
- * Luokka sisältää Pakan toiminnallisuuden.
+ * Class represents a card deck.
  */
 public class Pakka implements Iterable<Kortti>, Serializable {
 
-    private String nimi;
+    private final String nimi;
     private List<Kortti> kortit;
     private ListMemento<Kortti> memento;
-    
+
     public Pakka(String pakanNimi) {
         nimi = pakanNimi;
         kortit = new ArrayList<>();
@@ -25,17 +24,21 @@ public class Pakka implements Iterable<Kortti>, Serializable {
     public String getNimi() {
         return nimi;
     }
-    
+
     public int getKoko() {
         return kortit.size();
     }
 
+    /**
+     * Method adds a card.
+     * @param kortti card
+     */
     public void lisaaKortti(Kortti kortti) {
         kortit.add(kortti);
     }
 
     /**
-     * Metodi sekoittaa pakan.
+     * Method shuffles the deck.
      */
     public void sekoita() {
         if (memento == null) {
@@ -43,9 +46,9 @@ public class Pakka implements Iterable<Kortti>, Serializable {
         }
         Collections.shuffle(kortit);
     }
-    
+
     /**
-     * Metodi palauttaa pakan ensimmäistä sekoitusta edeltävään tilaan. 
+     * Methods restores the initial deck state before the first shuffling.
      */
     public void palautaAlkutilaan() {
         if (memento == null) {
@@ -53,7 +56,12 @@ public class Pakka implements Iterable<Kortti>, Serializable {
         }
         kortit = memento.getAlkutila();
     }
-    
+
+    /**
+     * Method returns a card for given index.
+     * @param indeksi index
+     * @return card or null if index larger than size of the deck
+     */
     public Kortti getKortti(int indeksi) {
         if (kortit.size() > indeksi) {
             return kortit.get(indeksi);
@@ -61,10 +69,14 @@ public class Pakka implements Iterable<Kortti>, Serializable {
         return null;
     }
 
+    /**
+     * Method returns a list of all cards.
+     * @return cards
+     */
     public List<Kortti> getKortit() {
         return kortit;
     }
-    
+
     @Override
     public Iterator<Kortti> iterator() {
         return kortit.iterator();

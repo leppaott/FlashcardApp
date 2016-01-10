@@ -10,13 +10,13 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- * Luokka laajentaa JMenuBar.
+ * Class creates a menu bar.
  */
 public class MenuBar extends JMenuBar {
 
     private final Kayttoliittyma gui;
     private final FlashcardApp app;
-    
+
     public MenuBar(Kayttoliittyma gui, FlashcardApp app) {
         super();
         this.gui = gui;
@@ -52,8 +52,8 @@ public class MenuBar extends JMenuBar {
             return chooser;
         }
         return null;
-    } 
-    
+    }
+
     private void avaaTietokanta(ActionEvent ae) {
         JFileChooser chooser = getChooser();
         if (chooser != null) {

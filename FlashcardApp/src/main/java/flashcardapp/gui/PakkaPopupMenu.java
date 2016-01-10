@@ -4,6 +4,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+/**
+ * A context menu for deck buttons.
+ * @see PakkaPaneeli
+ */
 public class PakkaPopupMenu  extends JPopupMenu {
     private PakkaNappi nappi;
     

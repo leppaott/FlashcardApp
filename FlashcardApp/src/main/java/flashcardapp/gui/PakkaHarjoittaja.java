@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * PakkaHarjoittaja-paneeli luo pakan harjoitusta varten näkymän.
+ * Class creates a view for deck training.
  */
 public class PakkaHarjoittaja extends JPanel {
 
@@ -23,10 +23,6 @@ public class PakkaHarjoittaja extends JPanel {
     private Pakka pakka;
     private int kortti;
 
-    /**
-     *
-     * @param gui
-     */
     public PakkaHarjoittaja(Kayttoliittyma gui) {
         super();
         this.gui = gui;
@@ -74,9 +70,8 @@ public class PakkaHarjoittaja extends JPanel {
     }
 
     /**
-     * Alustaa PakkaHarjoittajan annetulle pakalle.
-     *
-     * @param pakka Harjoitettava pakka.
+     *Initializes training for a given deck.
+     * @param pakka a deck to be trained
      */
     public void alusta(Pakka pakka) {
         this.pakka = pakka;

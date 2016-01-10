@@ -9,7 +9,8 @@ import java.util.Map;
 import javax.swing.JButton;
 
 /**
- * Luokka laajentaa JButton pakoille.
+ * Class for deck buttons.
+ * @see PakkaPaneeli
  */
 public class PakkaNappi extends JButton {
 
@@ -24,7 +25,7 @@ public class PakkaNappi extends JButton {
     }
 
     /**
-     * Metodi vaihtaa alleviivauksen päälle tai pois napille.
+     * Method toggles underline on and off for the button.
      */
     public void vaihdaAlleviivausNapille() {
         Font font = super.getFont();

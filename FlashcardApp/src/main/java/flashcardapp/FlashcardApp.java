@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Luokka ylläpitää tietokantaa ja tarjoaa metodeita pakkojen hakemiseen ja
- * tallentamiseen.
+ * Class encapsulates database and provides methods for saving and loading decks.
  */
 public class FlashcardApp {
 
@@ -22,31 +21,34 @@ public class FlashcardApp {
     }
 
     /**
-     * Metodi lataa pakat tietokannasta sisäiseen säiliöön.
+     * Method loads decks into internal storage.
      */
     public void lataaPakat() {
         pakat.clear();
         tietokanta.lataaPakat().forEach(pakka -> pakat.put(pakka.getNimi(), pakka));
     }
 
+    /**
+     * Sets used file for a database and loads decks.
+     * @see #lataaPakat()
+     * @param tiedosto file name
+     */
     public void lataaPakat(String tiedosto) {
         tietokanta.setTiedosto(tiedosto);
         lataaPakat();
     }
 
     /**
-     * Metodi tallentaa pakat tietokantaan.
+     * Method saves decks to a database.
      */
     public void tallennaPakat() {
-        if (pakat.size() > 0) {
-            tietokanta.tallennaPakat(getPakat());
-        }
+        tietokanta.tallennaPakat(getPakat());
     }
 
     /**
-     * Metodi tallentaa pakat tiedosto-nimiseen tietokantaan.
-     *
-     * @param tiedosto
+     * Methods sets used file and saves decks.
+     * @see #tallennaPakat()
+     * @param tiedosto file name
      */
     public void tallennaPakat(String tiedosto) {
         tietokanta.setTiedosto(tiedosto);
@@ -57,14 +59,27 @@ public class FlashcardApp {
         return new ArrayList<>(pakat.values());
     }
 
+    /**
+     * Method returns a deck with given name.
+     * @param nimi deck name
+     * @return deck
+     */
     public Pakka haePakka(String nimi) {
         return pakat.get(nimi);
     }
 
+    /**
+     * Method creates a new deck and stores it.
+     * @param nimi deck name
+     */
     public void lisaaPakka(String nimi) {
         pakat.put(nimi, new Pakka(nimi));
     }
 
+    /**
+     * Method removes a deck with given name.
+     * @param nimi deck name
+     */
     public void poistaPakka(String nimi) {
         pakat.remove(nimi);
     }

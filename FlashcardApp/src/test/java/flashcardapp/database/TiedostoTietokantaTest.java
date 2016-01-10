@@ -3,7 +3,6 @@ package flashcardapp.database;
 import flashcardapp.domain.Kortti;
 import flashcardapp.domain.Pakka;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +48,5 @@ public class TiedostoTietokantaTest {
                 assertEquals(a.getKortti(j).toString(), b.getKortti(j).toString());
             }
         }
-        //assertEquals(pakat, luetut) //nope
-        //assertEquals(true, Arrays.equals(pakat.toArray(), luetut.toArray())); //nope
     }
 }
